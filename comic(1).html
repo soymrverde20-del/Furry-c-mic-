@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Visor de Cómic</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  margin:0;
+  background:#0d0d0d;
+  font-family:system-ui, sans-serif;
+  color:white;
+}
+header{
+  position:sticky;
+  top:0;
+  background:#111;
+  padding:15px;
+  text-align:center;
+  font-size:1.6rem;
+  font-weight:bold;
+  letter-spacing:1px;
+  box-shadow:0 2px 12px rgba(0,0,0,.6);
+  z-index:10;
+}
+.viewer{
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
+img{
+  max-width:100%;
+  height:auto;
+  border-radius:14px;
+  box-shadow:0 0 30px rgba(255,255,255,.08);
+  transition:.25s ease;
+  cursor:zoom-in;
+}
+img.zoomed{
+  transform:scale(1.8);
+  cursor:zoom-out;
+}
+.controls{
+  text-align:center;
+  margin:10px;
+}
+input{
+  padding:10px;
+  width:60%;
+  max-width:400px;
+  border-radius:20px;
+  border:none;
+  outline:none;
+}
+button{
+  padding:10px 18px;
+  margin-left:8px;
+  border:none;
+  border-radius:20px;
+  background:#2b7cff;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{
+  background:#5599ff;
+}
+.tip{
+  opacity:.7;
+  font-size:.9rem;
+  margin-top:8px;
+}
+</style>
+</head>
+<body>
+
+<header>📖 Visor de Cómic</header>
+
+<div class="controls">
+  <input type="text" id="urlInput" placeholder="Pega aquí el link de la imagen">
+  <button onclick="cargarImagen()">Cargar</button>
+  <div class="tip">Click en la imagen para hacer zoom</div>
+</div>
+
+<div class="viewer">
+  <img id="comic">
+</div>
+
+<script>
+function cargarImagen(){
+  const url=document.getElementById("urlInput").value;
+  const img=document.getElementById("comic");
+  if(url.trim()!==""){
+    img.src=url;
+  }
+}
+
+const img=document.getElementById("comic");
+img.addEventListener("click",()=>{
+  img.classList.toggle("zoomed");
+});
+</script>
+
+</body>
+</html>
